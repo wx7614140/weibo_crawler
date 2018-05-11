@@ -3,6 +3,106 @@
   <groupId>com.wx</groupId>
   <artifactId>weibo</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <build>
+		<finalName>crawler</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+					<appendAssemblyId>false</appendAssemblyId>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+					<archive>
+						<manifest>
+							<mainClass>com.wx.weibo.Main</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>assembly</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                        	<encoding>UTF-8</encoding>
+                            <outputDirectory>lib</outputDirectory>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>false</overWriteSnapshots>
+                            <overWriteIfNewer>true</overWriteIfNewer>
+                            <includeScope>runtime</includeScope>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+		</plugins>
+		<resources>
+			<resource>
+				<directory>config</directory>
+				<includes>
+					<include>weibo.properties</include>
+				</includes>
+				<filtering>false</filtering>
+				<targetPath>config</targetPath>
+			</resource>
+			<resource>
+				<directory>config</directory>
+				<includes>
+					<include>log4j.properties</include>
+				</includes>
+				<filtering>false</filtering>
+				<targetPath></targetPath>
+			</resource>
+			<resource>
+				<directory>driver/win32</directory>
+				<includes>
+					<include>chromedriver.exe</include>
+				</includes>
+				<filtering>false</filtering>
+				<targetPath>driver/win32</targetPath>
+			</resource>
+			<resource>
+				<directory>driver/linux64</directory>
+				<includes>
+					<include>chromedriver</include>
+				</includes>
+				<filtering>false</filtering>
+				<targetPath>driver/linux64</targetPath>
+			</resource>
+			
+		</resources>
+	</build>
+	<properties>
+		<project.build.sourceEmcoding>UTF-8</project.build.sourceEmcoding>
+	</properties>
   <dependencies>
   	<dependency>
 		<groupId>org.seleniumhq.selenium</groupId>
@@ -18,6 +118,17 @@
 	    <groupId>org.seleniumhq.selenium</groupId>
 	    <artifactId>selenium-remote-driver</artifactId>
 	    <version>3.11.0</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.apache.commons</groupId>
+	    <artifactId>commons-lang3</artifactId>
+	    <version>3.7</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
+	<dependency>
+	    <groupId>org.slf4j</groupId>
+	    <artifactId>slf4j-log4j12</artifactId>
+	    <version>1.8.0-beta2</version>
 	</dependency>
   </dependencies>
 </project>

@@ -1,2 +1,5 @@
 eclipse.preferences.version=1
-encoding/<project>=UTF-8
+encoding//config/log4j.properties=UTF-8
+encoding//config/weibo.properties=UTF-8
+encoding//src/main/java=UTF-8
+encoding//src/test/java=UTF-8
